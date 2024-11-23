@@ -1,0 +1,51 @@
+local conn = nil
+local con2 = nil
+local blink = false
+local function BlinkLibraryFunc(toggle)
+    local Player = game:GetService("Players").LocalPlayer
+    if toggle then
+        if not conn then
+            conn = game:GetService("UserInputService").InputBegan:Connect(function(input)
+                if input.KeyCode == Enum.KeyCode.LeftShift then
+                    blink = true
+                    while blink == true do
+                        if Player then
+                            if Player.Character then
+                                local Root = Player.Character:FindFirstChild("HumanoidRootPart")
+                                local Humanoid = Player.Character:FindFirstChildOfClass("Humanoid")
+                                if Root ~= nil and Humanoid ~= nil then
+                                    if Humanoid.MoveDirection ~= Vector3.zero then
+                                        local MoveDirection = Humanoid.MoveDirection
+                                        local PlayerCFrame  = Root.CFrame
+                                        Root.CFrame         = PlayerCFrame + MoveDirection
+                                    end
+                                end
+                            end
+                        end
+                        task.wait()
+                    end
+                end
+            end)
+            
+            con2 = game:GetService("UserInputService").InputEnded:Connect(function(input)
+                if input.KeyCode == Enum.KeyCode.LeftShift then
+                    blink = false
+                end
+            end)
+        end
+    else
+        if conn then
+            conn:Disconnect()
+            conn = nil
+        end
+
+        if con2 then
+            con2:Disconnect()
+            con2 = nil
+        end
+        
+        if blink == true then blink = false end
+    end
+end
+
+BlinkLibraryFunc(true)
