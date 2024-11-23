@@ -1,0 +1,15 @@
+local Players = game:GetService("Players")
+
+local Client = Players.LocalPlayer
+local Character = Client.Character
+local Humanoid = Character ~= nil and Character:FindFirstChildOfClass("Humanoid")
+
+if Humanoid then
+    local Animation = Instance.new("Animation")
+    Animation.AnimationId = "rbxassetid://15309223710"
+
+    local Track = Humanoid:LoadAnimation(Animation)
+    Track.Priority = Enum.AnimationPriority.Action4
+    Track:Play()
+    Track:AdjustSpeed(0.10) -- adjust in the barcets to any 
+end
