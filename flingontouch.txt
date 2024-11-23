@@ -1,0 +1,21 @@
+local a = game.Players.LocalPlayer
+local b = function()
+    return Vector3.new(math.random(1000, 9999), math.random(1000, 9999), math.random(1000, 9999)) * math.random(10, 100)
+end
+local c = game:GetService("RunService")
+local d = c.RenderStepped
+local e = c.Heartbeat
+e:Connect(function()
+    local f = a.Character
+    if f then
+        local g, h = f:FindFirstChildWhichIsA("Humanoid"), f:FindFirstChild("HumanoidRootPart")
+        if g and h and g.Health > 1 then
+            local i, j = h.Velocity, h.RotVelocity
+            h.Velocity = b();
+            h.RotVelocity = b();
+            d:Wait()
+            h.Velocity = i;
+            h.RotVelocity = j
+        end
+    end
+end)
